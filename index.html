@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <title>Rodacar — Automotora</title>
+  <meta name="description" content="Rodacar — Tu próximo auto está más cerca. Automotora en Montevideo, Uruguay.">
+  <style>
+    :root{
+      --bg:#050505; --panel:#0b0b0b; --text:#f4f4f2; --muted:#9b9b98;
+      --line:rgba(255,255,255,.14); --max:1280px;
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.35}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:20;
+      padding:22px 20px;display:flex;justify-content:space-between;align-items:center;
+      mix-blend-mode:difference;color:#fff
+    }
+    .logo{font-size:16px;font-weight:800;letter-spacing:.06em}
+    .menu{width:42px;height:42px;border:1px solid rgba(255,255,255,.55);border-radius:50%;
+      background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer}
+    .menu span,.menu span:before,.menu span:after{display:block;width:15px;height:1px;background:currentColor;content:"";position:relative}
+    .menu span:before{position:absolute;top:-5px}.menu span:after{position:absolute;top:5px}
+    .hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:0;background:
+      linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.1) 35%,rgba(0,0,0,.8) 100%),
+      url("assets/hero.jpg") center center/cover no-repeat;transform:scale(1.015)}
+    .hero-inner{position:relative;z-index:1;width:min(100%,var(--max));margin:auto;padding:120px 20px 54px}
+    .eyebrow{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#c5c5c1;margin-bottom:18px}
+    h1{font-size:clamp(54px,12vw,120px);font-weight:400;line-height:.88;letter-spacing:-.055em;margin:0;max-width:760px}
+    .hero-copy{margin-top:26px;max-width:470px;color:#c8c8c5;font-size:15px}
+    .btn{
+      display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.65);
+      border-radius:999px;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:.04em;
+      text-transform:uppercase;transition:.35s var(--ease);margin-top:28px;background:rgba(0,0,0,.2);backdrop-filter:blur(10px)
+    }
+    .btn:hover{background:#fff;color:#000;transform:translateY(-2px)}
+    .scroll{margin-top:42px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#999}
+    section{border-top:1px solid var(--line)}
+    .dark-section{background:var(--bg)}
+    .section-pad{padding:88px 0}
+    .kicker{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#777;margin-bottom:20px}
+    h2{font-weight:400;font-size:clamp(38px,8vw,84px);line-height:.94;letter-spacing:-.045em;margin:0;max-width:900px}
+    .intro{color:#aaa;max-width:520px;font-size:15px;margin-top:24px}
+    .categories{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:48px}
+    .cat{min-height:180px;border:1px solid var(--line);position:relative;overflow:hidden;padding:20px;display:flex;align-items:flex-end;background:#0b0b0b}
+    .cat:before{content:"";position:absolute;inset:0;background:var(--img) center/cover;opacity:.55;transition:.7s var(--ease)}
+    .cat:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.85))}
+    .cat:hover:before{transform:scale(1.06);opacity:.8}
+    .cat > div{position:relative;z-index:1;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .split{display:grid;gap:0}
+    .image-block{min-height:70svh;position:relative;overflow:hidden}
+    .image-block img{width:100%;height:100%;object-fit:cover;display:block}
+    .image-overlay{position:absolute;inset:auto 0 0;padding:34px 20px;background:linear-gradient(transparent,rgba(0,0,0,.9))}
+    .image-overlay h3{font-size:42px;line-height:.95;font-weight:400;letter-spacing:-.04em;margin:0 0 16px}
+    .number{font-size:10px;letter-spacing:.18em;color:#aaa;text-transform:uppercase}
+    .benefits{display:grid;gap:0;margin-top:42px;border-top:1px solid var(--line)}
+    .benefit{padding:24px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center}
+    .benefit b{font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+    .benefit p{grid-column:2/4;margin:3px 0 0;color:#777;font-size:13px}
+    .arrow{color:#777}
+    .services{display:grid;gap:1px;background:var(--line);margin-top:44px}
+    .service{background:var(--bg);padding:26px 20px;min-height:120px}
+    .service strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    .service p{color:#777;font-size:13px;margin:10px 0 0}
+    .cta{min-height:76svh;display:flex;align-items:flex-end;position:relative;overflow:hidden}
+    .cta:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78)),url("assets/taillight.jpg") center/cover}
+    .cta-inner{position:relative;padding:100px 20px 60px;width:min(100%,var(--max));margin:auto}
+    .cta h2{max-width:650px}
+    footer{border-top:1px solid var(--line);padding:34px 20px 44px;color:#777;font-size:11px}
+    footer .foot{width:min(100%,var(--max));margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+    .reveal.show{opacity:1;transform:none}
+    @media (min-width:760px){
+      header{padding:28px 38px}.wrap{width:min(calc(100% - 76px),var(--max))}
+      .hero-inner{padding:160px 38px 70px}
+      .section-pad{padding:130px 0}
+      .categories{grid-template-columns:repeat(4,1fr)}
+      .cat{min-height:360px}
+      .split{grid-template-columns:1fr 1fr}
+      .image-block{min-height:760px}
+      .image-overlay{padding:44px}
+      .image-overlay h3{font-size:58px}
+      .services{grid-template-columns:repeat(3,1fr)}
+      .service{padding:34px;min-height:180px}
+      .cta-inner{padding:150px 38px 80px}
+      .cta{min-height:720px}
+    }
+  </style>
+  <!-- TRACKING: falta el token real de Cloudflare Web Analytics.
+       Cuando el dominio esté agregado en Cloudflare, pegar acá el snippet que da su panel
+       (Analytics & Logs → Web Analytics → Add site), algo como:
+       <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"TU_TOKEN"}'></script> -->
+</head>
+<body>
+  <header>
+    <a class="logo" href="#">RODACAR</a>
+    <button class="menu" aria-label="Menú"><span></span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow reveal">Montevideo · Uruguay</div>
+        <h1 class="reveal">Tu próximo<br>auto, más cerca.</h1>
+        <p class="hero-copy reveal">Una automotora pensada para ayudarte a encontrar el auto que realmente estás buscando.</p>
+        <a class="btn reveal" href="https://www.instagram.com/rodacar_automoviles/" target="_blank" rel="noopener">Ver stock en Instagram <span>→</span></a>
+        <div class="scroll reveal">Scroll ↓</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="image-block">
+          <img src="assets/vento.jpg" alt="Volkswagen Vento en ruta al atardecer" loading="lazy">
+          <div class="image-overlay">
+            <div class="number">01 · Por qué elegirnos</div>
+            <h3>Más que<br>autos.</h3>
+          </div>
+        </div>
+        <div class="wrap section-pad" style="align-self:center">
+          <div class="kicker reveal">Rodacar</div>
+          <h2 class="reveal">Una experiencia simple.</h2>
+          <p class="intro reveal">Te acompañamos de principio a fin, con atención personalizada y un proceso claro.</p>
+          <div class="benefits">
+            <div class="benefit reveal"><span>01</span><b>Confianza</b><span class="arrow">→</span><p>Trato claro y seguro.</p></div>
+            <div class="benefit reveal"><span>02</span><b>Experiencia</b><span class="arrow">→</span><p>Años conociendo el mercado.</p></div>
+            <div class="benefit reveal"><span>03</span><b>Atención</b><span class="arrow">→</span><p>Te asesoramos de verdad.</p></div>
+            <div class="benefit reveal"><span>04</span><b>Variedad</b><span class="arrow">→</span><p>Opciones para cada necesidad.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section">
+      <div class="wrap section-pad">
+        <div class="kicker reveal">02 · Servicios</div>
+        <h2 class="reveal">Hacelo<br>posible.</h2>
+        <p class="intro reveal">También te ayudamos con el siguiente paso.</p>
+        <div class="services">
+          <div class="service reveal"><strong>Financiación →</strong><p>Opciones a tu medida.</p></div>
+          <div class="service reveal"><strong>Permuta →</strong><p>Dejá tu auto y llevate otro.</p></div>
+          <div class="service reveal"><strong>Asesoramiento →</strong><p>Te guiamos durante todo el proceso.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="cta">
+      <div class="cta-inner">
+        <div class="kicker reveal">03 · Hablemos</div>
+        <h2 class="reveal">Tu próximo<br>auto está más cerca.</h2>
+        <p class="intro reveal">Contanos qué estás buscando y te ayudamos a encontrarlo.</p>
+        <a class="btn reveal" href="#contacto" onclick="openWhatsApp(event)">Hablar por WhatsApp <span>→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <strong style="color:#fff;letter-spacing:.08em">RODACAR</strong>
+      <span>Montevideo, Uruguay</span>
+      <span>© 2026 Rodacar</span>
+    </div>
+  </footer>
+
+  <script>
+    // Reemplazá este valor por el número real de Rodacar, con código de país y sin + ni espacios.
+    const WHATSAPP_NUMBER = "59898700090";
+    const MESSAGE = "Hola Rodacar, estoy buscando un auto y quisiera consultar las opciones disponibles.";
+
+    function openWhatsApp(e){
+      e.preventDefault();
+      if(!WHATSAPP_NUMBER){
+        alert("Configurá el número de WhatsApp de Rodacar en index.html.");
+        return;
+      }
+      window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(MESSAGE), "_blank");
+    }
+
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach((entry)=>{
+        if(entry.isIntersecting) entry.target.classList.add("show");
+      });
+    },{threshold:.12});
+
+    document.querySelectorAll(".reveal").forEach((el,i)=>{
+      el.style.transitionDelay = Math.min(i % 5, 4) * 70 + "ms";
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
